@@ -17,6 +17,7 @@ server.on('request', (req, res) => {
       if (!pathname || pathname.includes('/')) {
         res.statusCode = 400;
         res.end('Incorrect filename');
+        return;
       }
 
       const limitedStream = new LimitSizeStream({limit: 1048576, encoding: 'utf-8'});

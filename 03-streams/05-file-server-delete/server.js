@@ -16,13 +16,13 @@ server.on('request', (req, res) => {
       if (!pathname || pathname.includes('/')) {
         res.statusCode = 400;
         res.end('Incorrect filename');
-        break;
+        return;
       }
 
       if (!fs.existsSync(filepath)) {
         res.statusCode = 404;
         res.end('File not found');
-        break;
+        return;
       }
 
       fs.unlink(filepath, (err) => {

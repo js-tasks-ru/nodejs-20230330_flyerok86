@@ -16,6 +16,7 @@ server.on('request', (req, res) => {
       if (!url.pathname.split('/').pop().includes('.')) {
         res.statusCode = 400;
         res.end('Incorrect filename');
+        return;
       }
 
       const stream = fs.createReadStream(filepath);
