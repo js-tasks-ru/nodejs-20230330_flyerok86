@@ -15,11 +15,14 @@ router.get('/subscribe', async (ctx, next) => {
 });
 
 router.post('/publish', async (ctx, next) => {
-    if(ctx.request.body.message) {
-        subscribers.forEach(resolve => {
-            resolve(ctx.request.body?.message)
-        });
+    if(!ctx.request.body.message) {
+        ctx.status = 204;
+        return;
     }
+
+    subscribers.forEach(resolve => {
+        resolve(ctx.request.body?.message)
+    });
     subscribers = []
     ctx.status = 201;
 });
